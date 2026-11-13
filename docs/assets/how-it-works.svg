@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-labelledby="t d">
+  <title id="t">How Memory Mirror works</title>
+  <desc id="d">Open your ChatGPT export. A Web Worker in your tab parses conversations and runs deterministic detectors. The production security policy restricts scripted connections. Review masked findings and a cleanup plan; inspect any download before sharing.</desc>
+  <defs>
+    <linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f7a1c4"/><stop offset="1" stop-color="#b9a6ff"/></linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0l10 5-10 5z" fill="#b9a6ff"/></marker>
+  </defs>
+  <rect width="1200" height="360" rx="24" fill="#120f24"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <!-- Browser tab boundary -->
+    <rect x="392" y="40" width="760" height="280" rx="22" fill="none" stroke="#8ee6b8" stroke-opacity=".55" stroke-dasharray="8 7" stroke-width="2"/>
+    <text x="414" y="70" fill="#8ee6b8" font-size="14" font-weight="700" letter-spacing="2">YOUR BROWSER TAB · connect-src 'none'</text>
+
+    <!-- Step 1 -->
+    <rect x="48" y="92" width="290" height="196" rx="20" fill="#1b1832" stroke="#ffffff" stroke-opacity=".1"/>
+    <circle cx="86" cy="130" r="20" fill="url(#a)"/><text x="80" y="136" fill="#1c0f24" font-size="17" font-weight="800">1</text>
+    <text x="118" y="137" fill="#f5f2ff" font-size="21" font-weight="700">Drop your export</text>
+    <text x="72" y="180" fill="#bdb6dc" font-size="15">ChatGPT export .zip,</text>
+    <text x="72" y="204" fill="#bdb6dc" font-size="15">conversations.json,</text>
+    <text x="72" y="228" fill="#bdb6dc" font-size="15">memories.json or a .txt</text>
+    <text x="72" y="262" fill="#f7a1c4" font-size="14" font-weight="600">Only chat files are unzipped</text>
+
+    <path d="M346 190h70" stroke="#b9a6ff" stroke-width="3" marker-end="url(#arrow)"/>
+
+    <!-- Step 2 -->
+    <rect x="428" y="92" width="330" height="196" rx="20" fill="#1b1832" stroke="#ffffff" stroke-opacity=".1"/>
+    <circle cx="466" cy="130" r="20" fill="url(#a)"/><text x="460" y="136" fill="#1c0f24" font-size="17" font-weight="800">2</text>
+    <text x="498" y="137" fill="#f5f2ff" font-size="21" font-weight="700">Scan in a Web Worker</text>
+    <text x="452" y="180" fill="#bdb6dc" font-size="15">50+ detectors: Luhn, IBAN MOD-97,</text>
+    <text x="452" y="204" fill="#bdb6dc" font-size="15">national ID checksums, secrets,</text>
+    <text x="452" y="228" fill="#bdb6dc" font-size="15">first-person health &amp; money context</text>
+    <text x="452" y="262" fill="#f7a1c4" font-size="14" font-weight="600">Your words only, unless you opt in</text>
+
+    <path d="M766 190h70" stroke="#b9a6ff" stroke-width="3" marker-end="url(#arrow)"/>
+
+    <!-- Step 3 -->
+    <rect x="848" y="92" width="280" height="196" rx="20" fill="#1b1832" stroke="#ffffff" stroke-opacity=".1"/>
+    <circle cx="886" cy="130" r="20" fill="url(#a)"/><text x="880" y="136" fill="#1c0f24" font-size="17" font-weight="800">3</text>
+    <text x="918" y="137" fill="#f5f2ff" font-size="21" font-weight="700">Review &amp; clean up</text>
+    <text x="872" y="180" fill="#bdb6dc" font-size="15">Exposure score, masked</text>
+    <text x="872" y="204" fill="#bdb6dc" font-size="15">findings, people, a ranked</text>
+    <text x="872" y="228" fill="#bdb6dc" font-size="15">cleanup plan &amp; redacted copy</text>
+    <text x="872" y="262" fill="#f7a1c4" font-size="14" font-weight="600">Delete in the original app</text>
+  </g>
+</svg>

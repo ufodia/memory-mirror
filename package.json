@@ -1,0 +1,56 @@
+{
+  "name": "memory-mirror",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A local privacy workbench for your ChatGPT exports: review sensitive details, masked findings and a ranked cleanup plan without uploading your conversations.",
+  "license": "MIT",
+  "author": "ufodia",
+  "homepage": "https://github.com/ufodia/memory-mirror#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ufodia/memory-mirror.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ufodia/memory-mirror/issues"
+  },
+  "funding": "https://buymeacoffee.com/ufodia",
+  "keywords": [
+    "privacy",
+    "chatgpt",
+    "ai-safety",
+    "data-export",
+    "pii-detection",
+    "local-first",
+    "typescript"
+  ],
+  "engines": {
+    "node": "24.x"
+  },
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc --noEmit && vite build",
+    "postbuild": "npm run prepare:hosting",
+    "preview": "vite preview --host 127.0.0.1",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:browser": "playwright test",
+    "check": "npm run typecheck && npm test && npm run build",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "prepare:hosting": "node scripts/prepare-hosting.mjs",
+    "screenshots": "node scripts/capture-screenshots.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.65.0",
+    "@types/node": "24.10.1",
+    "prettier": "3.10.1",
+    "typescript": "7.0.2",
+    "vite": "8.3.8",
+    "vitest": "5.1.0"
+  },
+  "dependencies": {
+    "fflate": "0.8.3"
+  }
+}

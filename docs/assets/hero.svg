@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="600" viewBox="0 0 1280 600" role="img" aria-labelledby="t d">
+  <title id="t">Memory Mirror</title>
+  <desc id="d">See what your AI chats reveal about you. A chat transcript reflected in a mirror, with health, money, location and people details highlighted and masked.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1b1638"/>
+      <stop offset=".55" stop-color="#120f24"/>
+      <stop offset="1" stop-color="#0c0a18"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f7a1c4"/>
+      <stop offset="1" stop-color="#b9a6ff"/>
+    </linearGradient>
+    <linearGradient id="title" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset=".7" stop-color="#ffd3e5"/>
+      <stop offset="1" stop-color="#d2c6ff"/>
+    </linearGradient>
+    <radialGradient id="glow" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#f7a1c4" stop-opacity=".35"/>
+      <stop offset="1" stop-color="#f7a1c4" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#b9a6ff" stop-opacity=".3"/>
+      <stop offset="1" stop-color="#b9a6ff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".1"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity=".02"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0v40" fill="none" stroke="#ffffff" stroke-opacity=".045"/>
+    </pattern>
+    <clipPath id="mirror"><ellipse cx="930" cy="290" rx="190" ry="236"/></clipPath>
+  </defs>
+
+  <rect width="1280" height="600" rx="28" fill="url(#bg)"/>
+  <rect width="1280" height="600" rx="28" fill="url(#grid)"/>
+  <circle cx="930" cy="290" r="330" fill="url(#glow)"/>
+  <circle cx="1180" cy="40" r="260" fill="url(#glow2)"/>
+
+  <!-- Copy -->
+  <text x="72" y="150" fill="#f7a1c4" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="15" font-weight="700" letter-spacing="4">PRIVATE BY CONSTRUCTION</text>
+  <text x="68" y="246" fill="url(#title)" font-family="Iowan Old Style, Palatino, Georgia, serif" font-size="86" font-weight="600" letter-spacing="-2">Memory</text>
+  <text x="68" y="336" fill="url(#title)" font-family="Iowan Old Style, Palatino, Georgia, serif" font-size="86" font-weight="600" letter-spacing="-2">Mirror</text>
+  <text x="72" y="392" fill="#d9d3f2" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="25">See what your AI chats reveal about you.</text>
+
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="15" font-weight="600">
+    <rect x="72" y="438" width="196" height="40" rx="20" fill="url(#accent)"/>
+    <text x="96" y="463" fill="#1c0f24">Runs in your browser</text>
+    <rect x="282" y="438" width="168" height="40" rx="20" fill="none" stroke="#ffffff" stroke-opacity=".25"/>
+    <text x="304" y="463" fill="#f5f2ff">Nothing uploaded</text>
+    <rect x="464" y="438" width="132" height="40" rx="20" fill="none" stroke="#ffffff" stroke-opacity=".25"/>
+    <text x="486" y="463" fill="#f5f2ff">MIT · ufodia</text>
+  </g>
+
+  <!-- Mirror -->
+  <ellipse cx="930" cy="290" rx="190" ry="236" fill="url(#glass)"/>
+  <g clip-path="url(#mirror)" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <!-- chat bubbles reflected inside the glass -->
+    <rect x="780" y="110" width="280" height="64" rx="18" fill="#2a2450"/>
+    <text x="800" y="138" fill="#e9e4ff" font-size="15">I’ve been on</text>
+    <rect x="890" y="122" width="96" height="24" rx="7" fill="#f7a1c4" fill-opacity=".2" stroke="#f7a1c4" stroke-dasharray="4 3"/>
+    <text x="900" y="139" fill="#ffd3e5" font-size="14" font-family="Consolas, monospace">s•••••••</text>
+    <text x="800" y="161" fill="#bdb6dc" font-size="14">for anxiety since March…</text>
+
+    <rect x="820" y="196" width="250" height="64" rx="18" fill="#3a2f6b"/>
+    <text x="840" y="224" fill="#e9e4ff" font-size="15">My daughter</text>
+    <rect x="936" y="208" width="70" height="24" rx="7" fill="#b9a6ff" fill-opacity=".2" stroke="#b9a6ff" stroke-dasharray="4 3"/>
+    <text x="948" y="225" fill="#ddd4ff" font-size="14" font-family="Consolas, monospace">M•••</text>
+    <text x="840" y="247" fill="#bdb6dc" font-size="14">has a peanut allergy…</text>
+
+    <rect x="770" y="282" width="300" height="64" rx="18" fill="#2a2450"/>
+    <text x="790" y="310" fill="#e9e4ff" font-size="15">My IBAN is</text>
+    <rect x="876" y="294" width="176" height="24" rx="7" fill="#ffd479" fill-opacity=".18" stroke="#ffd479" stroke-dasharray="4 3"/>
+    <text x="886" y="311" fill="#ffe7ad" font-size="14" font-family="Consolas, monospace">GB82 •••••••• 5432</text>
+    <text x="790" y="333" fill="#bdb6dc" font-size="14">for the transfer…</text>
+
+    <rect x="800" y="368" width="270" height="64" rx="18" fill="#3a2f6b"/>
+    <text x="820" y="396" fill="#e9e4ff" font-size="15">I live in</text>
+    <rect x="886" y="380" width="120" height="24" rx="7" fill="#8ee6b8" fill-opacity=".18" stroke="#8ee6b8" stroke-dasharray="4 3"/>
+    <text x="898" y="397" fill="#c8f5dc" font-size="14" font-family="Consolas, monospace">P••••••d</text>
+    <text x="820" y="419" fill="#bdb6dc" font-size="14">with my partner Sam…</text>
+    <path d="M760 80 L1000 520" stroke="#ffffff" stroke-opacity=".07" stroke-width="40"/>
+  </g>
+  <ellipse cx="930" cy="290" rx="190" ry="236" fill="none" stroke="url(#accent)" stroke-width="7"/>
+  <path d="M930 526v40m-60 0h120" stroke="url(#accent)" stroke-width="7" stroke-linecap="round"/>
+
+  <!-- Category tags orbiting the mirror -->
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="14" font-weight="700">
+    <rect x="1088" y="122" width="96" height="34" rx="17" fill="#151227" stroke="#f7a1c4"/>
+    <text x="1112" y="144" fill="#f7a1c4">Health</text>
+    <rect x="1112" y="250" width="94" height="34" rx="17" fill="#151227" stroke="#ffd479"/>
+    <text x="1136" y="272" fill="#ffd479">Money</text>
+    <rect x="1080" y="380" width="104" height="34" rx="17" fill="#151227" stroke="#8ee6b8"/>
+    <text x="1102" y="402" fill="#8ee6b8">Location</text>
+    <rect x="676" y="200" width="90" height="34" rx="17" fill="#151227" stroke="#b9a6ff"/>
+    <text x="698" y="222" fill="#b9a6ff">People</text>
+    <rect x="690" y="440" width="96" height="34" rx="17" fill="#151227" stroke="#ff8a8a"/>
+    <text x="714" y="462" fill="#ff8a8a">Secrets</text>
+  </g>
+</svg>

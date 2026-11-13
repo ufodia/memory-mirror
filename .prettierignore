@@ -1,0 +1,11 @@
+node_modules
+dist
+coverage
+playwright-report
+test-results
+package-lock.json
+docs/assets
+public
+examples
+*.md
+src/core/lexicon.ts

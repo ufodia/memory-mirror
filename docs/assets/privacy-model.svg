@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="t d">
+  <title id="t">Memory Mirror privacy model</title>
+  <desc id="d">Conversation analysis runs locally in a Web Worker. The application does not upload imported content or save it in a database. The production Content-Security-Policy blocks scripted connections and third-party resources. Static app files still load from the host; opening an external link navigates separately. Downloaded reports remain on your device and need review before sharing.</desc>
+  <defs>
+    <linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f7a1c4"/><stop offset="1" stop-color="#b9a6ff"/></linearGradient>
+    <marker id="ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0l10 5-10 5z" fill="#8ee6b8"/></marker>
+    <marker id="no" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0l10 5-10 5z" fill="#ff8a8a"/></marker>
+    <style>
+      .h{font:700 18px 'Segoe UI',Helvetica,Arial,sans-serif;fill:#f5f2ff}
+      .s{font:14px 'Segoe UI',Helvetica,Arial,sans-serif;fill:#bdb6dc}
+      .k{font:700 12px 'Segoe UI',Helvetica,Arial,sans-serif;letter-spacing:2px}
+      .m{font:13px Consolas,'SF Mono',monospace}
+    </style>
+  </defs>
+  <rect width="1200" height="430" rx="26" fill="#120f24"/>
+
+  <rect x="32" y="32" width="790" height="366" rx="22" fill="#151227" stroke="#ffffff" stroke-opacity=".1"/>
+  <text x="56" y="64" class="k" fill="#a8a2c6">YOUR DEVICE</text>
+
+  <rect x="56" y="98" width="190" height="250" rx="18" fill="#1b1832" stroke="#ffffff" stroke-opacity=".1"/>
+  <text x="80" y="134" class="h">Your disk</text>
+  <rect x="80" y="156" width="142" height="44" rx="10" fill="#231f3f"/><text x="96" y="183" class="m" fill="#f5f2ff">export.zip</text>
+  <text x="80" y="256" class="s">masked downloads</text>
+  <rect x="80" y="282" width="142" height="44" rx="10" fill="#231f3f"/><text x="96" y="309" class="m" fill="#f5f2ff">report.json</text>
+
+  <rect x="300" y="88" width="498" height="290" rx="20" fill="none" stroke="#8ee6b8" stroke-width="2" stroke-dasharray="8 7"/>
+  <text x="324" y="118" class="k" fill="#8ee6b8">BROWSER TAB</text>
+  <rect x="324" y="136" width="210" height="214" rx="16" fill="#1b1832" stroke="#ffffff" stroke-opacity=".1"/>
+  <text x="344" y="168" class="h">Web Worker</text>
+  <text x="344" y="196" class="s">unzip chat files only</text>
+  <text x="344" y="220" class="s">parse &amp; normalize</text>
+  <text x="344" y="244" class="s">53 detectors</text>
+  <text x="344" y="268" class="s">score &amp; rank</text>
+  <text x="344" y="292" class="s">redact on demand</text>
+  <text x="344" y="326" class="s" fill="#f7a1c4">tab memory</text>
+  <rect x="558" y="136" width="216" height="214" rx="16" fill="#1b1832" stroke="#ffffff" stroke-opacity=".1"/>
+  <text x="578" y="168" class="h">Page</text>
+  <text x="578" y="196" class="s">masked report</text>
+  <text x="578" y="220" class="s">privacy screen</text>
+  <text x="578" y="244" class="s">text nodes only</text>
+  <text x="578" y="268" class="s">no storage APIs</text>
+  <text x="578" y="292" class="s">no cookies</text>
+  <path d="M534 243h20" stroke="url(#a)" stroke-width="3"/>
+
+  <path d="M222 178 C 270 178, 280 200, 320 200" fill="none" stroke="#8ee6b8" stroke-width="3" marker-end="url(#ok)"/>
+  <path d="M560 340 C 420 400, 300 330, 226 312" fill="none" stroke="#8ee6b8" stroke-width="3" marker-end="url(#ok)"/>
+
+  <g transform="translate(846 170)">
+    <path d="M40 0l40 16v34c0 26-17 44-40 52C17 94 0 76 0 50V16z" fill="url(#a)"/>
+    <path d="M24 50l12 12 22-26" fill="none" stroke="#1c0f24" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text x="826" y="300" class="m" fill="#f7a1c4">connect-src 'none'</text>
+
+  <rect x="972" y="72" width="196" height="300" rx="20" fill="#1a1020" stroke="#ff8a8a" stroke-opacity=".4"/>
+  <text x="996" y="106" class="k" fill="#ff8a8a">EXTERNAL SERVICES</text>
+  <text x="996" y="148" class="s">upload endpoints</text>
+  <text x="996" y="182" class="s">analytics scripts</text>
+  <text x="996" y="216" class="s">remote AI APIs</text>
+  <text x="996" y="250" class="s">remote fonts</text>
+  <text x="996" y="284" class="s">beacons</text>
+  <text x="996" y="336" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#ff8a8a">Blocked by policy</text>
+  <path d="M798 230 H 840" stroke="#ff8a8a" stroke-width="3" stroke-dasharray="6 6"/>
+  <path d="M930 230 H 962" stroke="#ff8a8a" stroke-width="3" stroke-dasharray="6 6" marker-end="url(#no)"/>
+  <g stroke="#ff8a8a" stroke-width="4" stroke-linecap="round"><path d="M938 250l16 16m0-16l-16 16"/></g>
+</svg>

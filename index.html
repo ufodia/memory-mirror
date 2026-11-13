@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Memory Mirror — See what your AI chats reveal about you</title>
+    <meta
+      name="description"
+      content="Review sensitive details in your ChatGPT export locally. Inspect masked findings, add watch words and build a cleanup plan without uploading your conversations."
+    />
+    <meta name="theme-color" content="#151227" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Memory Mirror — See what your AI chats reveal about you" />
+    <meta
+      property="og:description"
+      content="A local privacy workbench for your ChatGPT export. Review health, money, location, identity and secret-related findings, then decide what to clean up."
+    />
+    <meta property="og:image" content="/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Memory Mirror home">
+        <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+          <defs>
+            <linearGradient id="mm-g" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#f7a1c4" />
+              <stop offset="1" stop-color="#b9a6ff" />
+            </linearGradient>
+          </defs>
+          <ellipse cx="20" cy="17" rx="11" ry="14" fill="none" stroke="url(#mm-g)" stroke-width="3" />
+          <path
+            d="M14 13c2-3 5-4 8-3"
+            fill="none"
+            stroke="#fff"
+            stroke-width="2"
+            stroke-linecap="round"
+            opacity=".7"
+          />
+          <path d="M20 31v6m-6 0h12" stroke="url(#mm-g)" stroke-width="3" stroke-linecap="round" />
+        </svg>
+        <span>Memory Mirror</span>
+      </a>
+      <nav class="topnav" aria-label="Primary">
+        <a href="#how">How it works</a>
+        <a href="#privacy">Privacy</a>
+        <a href="https://github.com/ufodia/memory-mirror" rel="noopener" target="_blank">GitHub</a>
+        <a class="coffee" href="https://buymeacoffee.com/ufodia" rel="noopener" target="_blank">☕ Support</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section id="intro" class="intro">
+        <p class="eyebrow">Private by construction · Open source</p>
+        <h1>What have you told your&nbsp;AI?</h1>
+        <p class="lead">
+          Memory Mirror reads your ChatGPT data export <strong>inside this tab</strong> and highlights the
+          health, money, location, family, identity and secret details you have shared — so you can decide
+          what to delete.
+        </p>
+
+        <div
+          id="dropzone"
+          class="dropzone"
+          role="group"
+          aria-label="Open an export"
+          aria-describedby="drop-help"
+        >
+          <svg class="drop-icon" viewBox="0 0 64 64" aria-hidden="true">
+            <rect
+              x="12"
+              y="8"
+              width="40"
+              height="48"
+              rx="8"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="3"
+            />
+            <path
+              d="M22 24h20M22 32h20M22 40h12"
+              stroke="currentColor"
+              stroke-width="3"
+              stroke-linecap="round"
+            />
+          </svg>
+          <p class="drop-title">Drop your export here</p>
+          <p id="drop-help" class="drop-help">
+            ChatGPT <code>.zip</code>, <code>conversations.json</code>, <code>memories.json</code>, or a
+            <code>.txt</code> of saved memories
+          </p>
+          <div class="drop-actions">
+            <input
+              id="file-input"
+              type="file"
+              multiple
+              accept=".zip,.json,.txt,.md,application/zip,application/json,text/plain"
+            />
+            <label class="button primary" for="file-input">Choose files</label>
+            <button id="demo-button" class="button ghost" type="button">Try the synthetic demo</button>
+          </div>
+        </div>
+        <p id="intro-error" class="error" role="alert" hidden></p>
+
+        <ul id="privacy" class="promises" aria-label="Privacy controls">
+          <li>
+            <strong>Your export stays local.</strong>
+            <span
+              >Analysis runs in your browser. The production policy blocks scripted connections (<code
+                >connect-src 'none'</code
+              >).</span
+            >
+          </li>
+          <li>
+            <strong>No application database.</strong>
+            <span
+              >Imported data stays in tab memory. Downloads remain on your device after you close it.</span
+            >
+          </li>
+          <li>
+            <strong>Masked by default.</strong>
+            <span>Values stay hidden behind a privacy screen until you reveal them.</span>
+          </li>
+        </ul>
+
+        <section id="how" class="how" aria-labelledby="how-title">
+          <h2 id="how-title">Open your ChatGPT export</h2>
+          <div class="how-grid">
+            <article class="how-card">
+              <h3>ChatGPT</h3>
+              <ol>
+                <li>Request your export through ChatGPT's data controls.</li>
+                <li>
+                  Follow
+                  <a
+                    href="https://help.openai.com/en/articles/7260999-how-do-i-export-my-chatgpt-history-and-data"
+                    rel="noopener"
+                    target="_blank"
+                    >OpenAI's export guide</a
+                  >
+                  for your account.
+                </li>
+                <li>Download the <code>.zip</code> from the email and drop it here as-is.</li>
+              </ol>
+            </article>
+            <article class="how-card">
+              <h3>Conversation JSON</h3>
+              <ol>
+                <li>Prefer opening just the conversation file?</li>
+                <li>Extract <code>conversations.json</code> from your ChatGPT archive.</li>
+                <li>Choose that file instead of the complete archive.</li>
+              </ol>
+            </article>
+            <article class="how-card">
+              <h3>Saved memories</h3>
+              <ol>
+                <li>Open ChatGPT's memory settings.</li>
+                <li>Copy the list into a <code>.txt</code> file.</li>
+                <li>Drop it here together with the export.</li>
+              </ol>
+            </article>
+          </div>
+          <p class="fine">
+            Exports can take minutes to days to arrive. Memory Mirror only opens
+            <code>conversations*.json</code> and <code>memories*.json</code> inside an archive; images and
+            other files are never decompressed.
+          </p>
+        </section>
+      </section>
+
+      <section id="progress" class="progress" hidden aria-live="polite">
+        <div class="progress-card">
+          <div class="progress-ring" aria-hidden="true"></div>
+          <p id="progress-message">Reading…</p>
+          <div class="bar"><span id="progress-bar"></span></div>
+        </div>
+      </section>
+
+      <section id="dashboard" class="dashboard" hidden></section>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="https://github.com/ufodia/memory-mirror" rel="noopener" target="_blank">Source on GitHub</a>
+        · MIT © 2026 ufodia ·
+        <a href="https://buymeacoffee.com/ufodia" rel="noopener" target="_blank">Buy me a coffee</a>
+      </p>
+      <p class="fine">
+        Memory Mirror is an independent project and is not affiliated with OpenAI. Findings are pattern
+        matches for your review and can be incomplete.
+      </p>
+    </footer>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

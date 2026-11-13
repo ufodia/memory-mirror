@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300" role="img" aria-labelledby="t d">
+  <title id="t">How the exposure score works</title>
+  <desc id="d">Category points equal weight times log base 2 of one plus the number of unique items. The score is 100 times one minus e to the minus total over 40. Levels: Low below 25, Moderate 25 to 49, High 50 to 74, Very high 75 and above.</desc>
+  <defs>
+    <linearGradient id="scale" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#8ee6b8"/><stop offset=".35" stop-color="#ffc77a"/><stop offset=".65" stop-color="#f7a1c4"/><stop offset="1" stop-color="#ff8a8a"/>
+    </linearGradient>
+    <style>
+      .h{font:700 13px 'Segoe UI',Helvetica,Arial,sans-serif;letter-spacing:2px}
+      .f{font:20px Consolas,'SF Mono',monospace;fill:#f5f2ff}
+      .s{font:14px 'Segoe UI',Helvetica,Arial,sans-serif;fill:#bdb6dc}
+      .l{font:700 15px 'Segoe UI',Helvetica,Arial,sans-serif}
+    </style>
+  </defs>
+  <rect width="1200" height="300" rx="26" fill="#120f24"/>
+  <text x="48" y="58" class="h" fill="#f7a1c4">THE EXPOSURE SCORE</text>
+  <text x="48" y="100" class="f">points = weight × log₂(1 + unique items)</text>
+  <text x="48" y="136" class="f">score  = 100 × (1 − e^(−Σ points / 40))</text>
+  <text x="700" y="96" class="s">The first disclosure in a category counts most;</text>
+  <text x="700" y="120" class="s">repeating the same email fifty times counts once.</text>
+  <text x="700" y="144" class="s">Secrets weigh 10, identity weighs 3.</text>
+
+  <rect x="48" y="180" width="1104" height="18" rx="9" fill="url(#scale)"/>
+  <g fill="#120f24"><rect x="323" y="176" width="3" height="26"/><rect x="599" y="176" width="3" height="26"/><rect x="875" y="176" width="3" height="26"/></g>
+  <text x="48" y="232" class="l" fill="#8ee6b8">Low</text><text x="48" y="254" class="s">0–24</text>
+  <text x="334" y="232" class="l" fill="#ffc77a">Moderate</text><text x="334" y="254" class="s">25–49</text>
+  <text x="610" y="232" class="l" fill="#f7a1c4">High</text><text x="610" y="254" class="s">50–74</text>
+  <text x="886" y="232" class="l" fill="#ff8a8a">Very high</text><text x="886" y="254" class="s">75–100</text>
+  <g transform="translate(1084 168)"><circle cx="0" cy="21" r="16" fill="#120f24" stroke="#ff8a8a" stroke-width="3"/><text x="-9" y="26" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#ff8a8a">94</text></g>
+  <text x="1010" y="282" class="s">synthetic demo</text>
+</svg>
