@@ -1,5 +1,5 @@
 /** Where a conversation came from. */
-export type Platform = 'chatgpt' | 'text';
+export type Platform = 'chatgpt' | 'claude' | 'openwebui' | 'sillytavern' | 'text';
 
 /** Who produced a piece of text inside a conversation. */
 export type Role = 'user' | 'assistant' | 'system' | 'tool';

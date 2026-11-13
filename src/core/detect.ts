@@ -82,7 +82,7 @@ function refineIban(value: string): string | null {
 export const RULES: Rule[] = [
   // Credentials and secrets.
   { category: 'credentials', type: 'private-key', label: 'Private key block', pattern: /-----BEGIN ((?:(?:RSA|EC|OPENSSH|DSA|PGP|ENCRYPTED) )?PRIVATE KEY(?: BLOCK)?)-----[\s\S]*?(?:-----END \1-----|$)/g },
-  { category: 'credentials', type: 'ai-api-key', label: 'AI provider API key', pattern: /\bsk-ant-[A-Za-z0-9_-]{20,}/g },
+  { category: 'credentials', type: 'ai-api-key', label: 'Anthropic API key', pattern: /\bsk-ant-[A-Za-z0-9_-]{20,}/g },
   { category: 'credentials', type: 'openai-key', label: 'OpenAI API key', pattern: /\bsk-(?:proj-|svcacct-)?[A-Za-z0-9_-]{20,}/g },
   { category: 'credentials', type: 'github-token', label: 'GitHub token', pattern: /\b(?:gh[pousr]_[A-Za-z0-9]{36,}|github_pat_[A-Za-z0-9_]{22,})/g },
   { category: 'credentials', type: 'aws-key', label: 'AWS access key ID', pattern: /\b(?:AKIA|ASIA)[0-9A-Z]{16}\b/g },

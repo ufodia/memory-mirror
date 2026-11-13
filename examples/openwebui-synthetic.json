@@ -1,0 +1,53 @@
+[
+  {
+    "id": "synthetic-openwebui-conversation",
+    "created_at": 1794502800,
+    "chat": {
+      "title": "Synthetic Open WebUI branches",
+      "history": {
+        "currentId": "assistant-branch-b",
+        "messages": {
+          "user-root": {
+            "id": "user-root",
+            "parentId": null,
+            "childrenIds": ["assistant-branch-a", "user-branch-b"],
+            "role": "user",
+            "content": "Synthetic example: reach me at openwebui-user@example.test.",
+            "timestamp": 1794502800
+          },
+          "assistant-branch-a": {
+            "id": "assistant-branch-a",
+            "parentId": "user-root",
+            "childrenIds": [],
+            "role": "assistant",
+            "content": "Synthetic assistant-only email: openwebui-assistant@example.test.",
+            "timestamp": 1794502801
+          },
+          "user-branch-b": {
+            "id": "user-branch-b",
+            "parentId": "user-root",
+            "childrenIds": ["assistant-branch-b"],
+            "role": "user",
+            "content": "Synthetic example: my salary is $75,000.",
+            "timestamp": 1794502802
+          },
+          "assistant-branch-b": {
+            "id": "assistant-branch-b",
+            "parentId": "user-branch-b",
+            "childrenIds": [],
+            "role": "assistant",
+            "content": "This is a synthetic budgeting conversation.",
+            "timestamp": 1794502803
+          }
+        }
+      },
+      "messages": [
+        {
+          "id": "user-root",
+          "role": "user",
+          "content": "Synthetic example: reach me at openwebui-user@example.test."
+        }
+      ]
+    }
+  }
+]

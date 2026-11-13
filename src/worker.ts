@@ -62,7 +62,7 @@ self.addEventListener('message', (event: MessageEvent<WorkerRequest>) => {
         ? error.message
         : error instanceof RangeError
           ? 'This export is too large for this browser tab. Try a desktop browser with more memory, or open conversations.json on its own.'
-          : 'The file could not be read. Make sure it is an unmodified ChatGPT export or a supported transcript.';
+          : 'The file could not be read. Make sure it is an unmodified ChatGPT or Claude export, or a supported transcript.';
     post({ type: 'error', job: 'job' in request ? request.job : 0, message });
   }
 });

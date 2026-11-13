@@ -136,7 +136,7 @@ export const DEMO_CHATGPT = [
   ]),
 ];
 
-/** Generic normalized transcripts, separate from the ChatGPT export fixture. */
+/** Synthetic Claude-shaped transcripts, separate from the ChatGPT export fixture. */
 export const DEMO_TRANSCRIPTS = [
   {
     uuid: '6f1c2d3e-4b5a-4c6d-8e7f-90a1b2c3d4e5',
@@ -198,7 +198,7 @@ export function demoFiles(): { name: string; bytes: Uint8Array }[] {
   const encode = (value: unknown) => new TextEncoder().encode(JSON.stringify(value));
   return [
     { name: 'chatgpt-demo/conversations.json', bytes: encode(DEMO_CHATGPT) },
-    { name: 'transcript-conversations.json', bytes: encode(DEMO_TRANSCRIPTS) },
+    { name: 'claude-demo/conversations.json', bytes: encode(DEMO_TRANSCRIPTS) },
     { name: 'demo-memories.json', bytes: encode(DEMO_MEMORIES) },
   ];
 }

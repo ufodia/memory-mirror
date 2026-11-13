@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-labelledby="t d">
   <title id="t">How Memory Mirror works</title>
-  <desc id="d">Open your ChatGPT export. A Web Worker in your tab parses conversations and runs deterministic detectors. The production security policy restricts scripted connections. Review masked findings and a cleanup plan; inspect any download before sharing.</desc>
+  <desc id="d">Open a supported LLM chat export from ChatGPT, Claude, Open WebUI or SillyTavern, or a standard message file. A Web Worker in your tab parses conversations and runs deterministic detectors. The production security policy restricts scripted connections. Review masked findings and a cleanup plan; inspect any download before sharing.</desc>
   <defs>
     <linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f7a1c4"/><stop offset="1" stop-color="#b9a6ff"/></linearGradient>
     <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0l10 5-10 5z" fill="#b9a6ff"/></marker>
@@ -15,9 +15,9 @@
     <rect x="48" y="92" width="290" height="196" rx="20" fill="#1b1832" stroke="#ffffff" stroke-opacity=".1"/>
     <circle cx="86" cy="130" r="20" fill="url(#a)"/><text x="80" y="136" fill="#1c0f24" font-size="17" font-weight="800">1</text>
     <text x="118" y="137" fill="#f5f2ff" font-size="21" font-weight="700">Drop your export</text>
-    <text x="72" y="180" fill="#bdb6dc" font-size="15">ChatGPT export .zip,</text>
-    <text x="72" y="204" fill="#bdb6dc" font-size="15">conversations.json,</text>
-    <text x="72" y="228" fill="#bdb6dc" font-size="15">memories.json or a .txt</text>
+    <text x="72" y="180" fill="#bdb6dc" font-size="15">ChatGPT, Claude, Open WebUI</text>
+    <text x="72" y="204" fill="#bdb6dc" font-size="15">or SillyTavern chat files</text>
+    <text x="72" y="228" fill="#bdb6dc" font-size="15">.json, .jsonl or plain text</text>
     <text x="72" y="262" fill="#f7a1c4" font-size="14" font-weight="600">Only chat files are unzipped</text>
 
     <path d="M346 190h70" stroke="#b9a6ff" stroke-width="3" marker-end="url(#arrow)"/>

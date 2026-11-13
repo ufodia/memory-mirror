@@ -54,7 +54,10 @@ test('people and cleanup plan', async ({ page }) => {
   );
   expect(checklist.name).toBe('memory-mirror-cleanup.md');
   expect(checklist.text).toContain('- [x] ');
-  await expect(page.locator('.cleanup-row a').first()).toHaveAttribute('href', /^https:\/\/chatgpt\.com\//);
+  await expect(page.locator('.cleanup-row a').first()).toHaveAttribute(
+    'href',
+    /^https:\/\/(chatgpt\.com|claude\.ai)\//,
+  );
 });
 
 test('exports are masked unless raw is chosen, and redaction replaces values', async ({ page }) => {
@@ -93,6 +96,127 @@ test('opens a real zip archive and rescans with watch words', async ({ page }) =
   await expect(page.locator('.category-card.cat-watchlist')).toBeVisible();
 });
 
+test('combines ChatGPT and Claude exports with the correct cleanup links', async ({ page }) => {
+  await page.goto('/');
+  const id = '8d5a7c20-84ac-4df3-80b7-9ba83b9deaf3';
+  const archive = zipSync({
+    'claude-export/conversations.json': strToU8(
+      JSON.stringify([
+        {
+          uuid: id,
+          name: 'Claude export review',
+          created_at: '2026-10-20T09:00:00Z',
+          chat_messages: [
+            {
+              uuid: 'synthetic-message',
+              sender: 'human',
+              created_at: '2026-10-20T09:00:00Z',
+              text: 'My email is local-review@example.com',
+            },
+          ],
+        },
+      ]),
+    ),
+  });
+  await page.locator('#file-input').setInputFiles([
+    {
+      name: 'chatgpt-conversations.json',
+      mimeType: 'application/json',
+      buffer: Buffer.from(JSON.stringify(DEMO_CHATGPT.slice(0, 1))),
+    },
+    { name: 'claude-export.zip', mimeType: 'application/zip', buffer: Buffer.from(archive) },
+  ]);
+  await expect(page.locator('.summary')).toContainText('2 conversations');
+  await page.getByRole('tab', { name: /Cleanup plan/ }).click();
+  await expect(page.getByRole('link', { name: 'Claude export review ↗' })).toHaveAttribute(
+    'href',
+    `https://claude.ai/chat/${id}`,
+  );
+  await expect(page.getByRole('link', { name: 'Weekly meal plan ↗' })).toHaveAttribute(
+    'href',
+    `https://chatgpt.com/c/${DEMO_CHATGPT[0].id}`,
+  );
+  await page.getByRole('tab', { name: 'Export' }).click();
+  const downloaded = await downloadText(page, () =>
+    page.getByRole('button', { name: 'Download JSON' }).click(),
+  );
+  const report = JSON.parse(downloaded.text);
+  expect(report.stats.platforms).toEqual({ chatgpt: 1, claude: 1 });
+  expect(report.valuesMasked).toBe(true);
+  expect(downloaded.text).not.toContain('local-review@example.com');
+});
+
+test('reviews local frontends and normalized transcripts with role-aware rescanning', async ({ page }) => {
+  await page.goto('/');
+  const openWebUi = [
+    {
+      id: 'ow1',
+      chat: {
+        title: 'Local AI',
+        history: {
+          messages: {
+            u1: { id: 'u1', role: 'user', content: 'My email is local-user@example.com' },
+            a1: { id: 'a1', role: 'assistant', content: 'My email is local-assistant@example.com' },
+          },
+        },
+      },
+    },
+  ];
+  const normalized = {
+    title: 'Normalized',
+    messages: [
+      { role: 'user', content: 'My email is normalized-user@example.com' },
+      { role: 'assistant', content: 'My email is normalized-assistant@example.com' },
+      { role: 'system', content: 'My email is system-metadata@example.com' },
+    ],
+  };
+  const jsonl = [
+    { chat_metadata: {}, user_name: 'You', character_name: 'Assistant' },
+    { is_user: true, mes: 'My email is tavern-user@example.com' },
+    { is_user: false, mes: 'My email is tavern-assistant@example.com' },
+  ]
+    .map((entry) => JSON.stringify(entry))
+    .join('\n');
+  await page.locator('#file-input').setInputFiles([
+    { name: 'openwebui.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(openWebUi)) },
+    {
+      name: 'normalized.json',
+      mimeType: 'application/json',
+      buffer: Buffer.from(JSON.stringify(normalized)),
+    },
+    { name: 'conversation.jsonl', mimeType: 'application/x-ndjson', buffer: Buffer.from(jsonl) },
+  ]);
+  await expect(page.locator('.summary')).toContainText('3 conversations');
+  await page.getByRole('tab', { name: /Cleanup plan/ }).click();
+  await expect(page.locator('.cleanup-row', { hasText: 'Local AI' })).toContainText('Source: Open WebUI');
+  await expect(page.locator('.cleanup-row', { hasText: 'Normalized' })).toContainText(
+    'Source: Text transcript',
+  );
+  await expect(page.locator('.cleanup-row a')).toHaveCount(0);
+  await page.getByRole('tab', { name: 'Export' }).click();
+  const initial = await downloadText(page, () => page.getByRole('button', { name: 'Download JSON' }).click());
+  const initialReport = JSON.parse(initial.text);
+  expect(initialReport.stats.platforms).toEqual({ openwebui: 1, text: 1, sillytavern: 1 });
+  expect(initialReport.findings).toHaveLength(3);
+  expect(initialReport.findings.every((finding: { role: string }) => finding.role === 'user')).toBe(true);
+  expect(initial.text).not.toContain('@example.com');
+
+  await page.getByLabel('Also scan assistant replies').check();
+  await page.getByRole('button', { name: 'Rescan' }).click();
+  await expect(page.locator('.summary')).toBeVisible();
+  const rescanned = await downloadText(page, () =>
+    page.getByRole('button', { name: 'Download JSON' }).click(),
+  );
+  const rescannedReport = JSON.parse(rescanned.text);
+  expect(rescannedReport.options.includeAssistant).toBe(true);
+  expect(rescannedReport.findings).toHaveLength(6);
+  expect(
+    rescannedReport.findings.filter((finding: { role: string }) => finding.role === 'assistant'),
+  ).toHaveLength(3);
+  expect(rescannedReport.findings.some((finding: { role: string }) => finding.role === 'system')).toBe(false);
+  expect(rescanned.text).not.toContain('@example.com');
+});
+
 test('imported text is never executed as HTML', async ({ page }) => {
   await page.goto('/');
   const hostile = [
@@ -129,7 +253,7 @@ test('explains unsupported files and works on a phone', async ({ page }) => {
   await page
     .locator('#file-input')
     .setInputFiles({ name: 'notes.json', mimeType: 'application/json', buffer: Buffer.from('{"hello":1}') });
-  await expect(page.locator('#intro-error')).toContainText('not a recognized ChatGPT');
+  await expect(page.locator('#intro-error')).toContainText('not a recognized');
 
   await page.setViewportSize({ width: 390, height: 844 });
   await page.getByRole('button', { name: 'Try the synthetic demo' }).click();

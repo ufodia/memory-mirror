@@ -24,7 +24,7 @@ npm run test:browser   # real browser workflow
 
 ## Good first contributions
 
-- A synthetic fixture that produces a false positive or a missed finding, with a failing test.
+- A synthetic supported-format fixture that produces a false positive, a missed finding or a parsing error, with a failing test and a harmless control. See the [native-format and normalization contracts](docs/input-formats.md).
 - Documentation fixes, clearer error messages, keyboard and screen-reader improvements.
 - Performance improvements with a before/after measurement.
 

@@ -9,11 +9,16 @@ Memory Mirror uses ordered, deterministic detectors. There is no AI model or net
 | Your messages | Yes | This is what you shared. |
 | Supported custom-instruction fields | Yes | Included when present in the supplied ChatGPT export. |
 | Supported attachment names | Yes | Filenames can contain identifying details even when file contents are not analyzed. |
+| Supported extracted-text fields in Claude input | Yes, when present | The reader uses supplied text; it does not open original attachments or extract missing text. |
 | Saved memories (`memories*.json` or a `.txt`) | Yes | Stored about you by the assistant. |
 | Assistant replies | Only with **Also scan assistant replies** | Replies may repeat or invent personal details; including them can add matches. |
 | System and tool messages | Never | They are not written by you. |
 
 For supported ChatGPT message trees, every readable branch present in the input is scanned, including earlier edits when the export contains them. Memory Mirror cannot recover deleted text or content that is absent from the supplied files.
+
+The Claude reader normalizes supported `chat_messages` lists and their text blocks. It retains the Claude source label and forms an account-side conversation link when the supplied identifier has the expected shape. An export may omit original attachments or other product data; no reader can analyze content that was not supplied.
+
+Open WebUI history nodes, SillyTavern `mes` records and normalized role/content JSON enter the same detector pipeline. The model behind a frontend does not change that pipeline. Structured user messages are scanned by default, assistant text is opt-in, and system/tool text is excluded. Plain text lacks role metadata and is treated as user-authored. See [input formats](input-formats.md) for fields that are intentionally ignored.
 
 ## Categories
 

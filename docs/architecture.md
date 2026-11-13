@@ -8,10 +8,10 @@ src/main.ts         page state, rendering, downloads
 src/dom.ts          text-only element factory, SVG helper, download helper
 src/worker.ts       Web Worker: holds the archive, runs scans, builds redactions
 src/protocol.ts     typed messages between page and worker
-src/demo.ts         synthetic ChatGPT, transcript and memory inputs
+src/demo.ts         synthetic chat exports and supplied memories
 src/core/
   types.ts          Conversation, Segment, Finding, ScanOptions
-  parse.ts          zip, ChatGPT, supplied-memory and text readers
+  parse.ts          zip, native chat adapters, role/content JSON, JSONL, memory and text readers
   validators.ts     Luhn, IBAN MOD 97, Turkish ID, US SSN, phone shape
   lexicon.ts        context-sensitive term lists
   detect.ts         ordered detector rules, first-person check, overlap resolution
@@ -24,7 +24,7 @@ src/core/
 
 1. The page reads each selected file into an `ArrayBuffer` and **transfers** it to the worker (no copy).
 2. `readUpload` checks the ZIP signature. Inside archives, `unzipSync` receives a filter for supported conversation or memory JSON names, with a ceiling of 1.5 billion uncompressed bytes per selected entry and 2 billion across selected entries. The interface's selected-input ceiling is 1.5 billion bytes. These checks do not guarantee that a device has enough memory to process the input.
-3. Supported ChatGPT trees, supplied transcripts, memory files and text are normalized to `Conversation → Segment[]`. Every segment carries its role (`user`, `assistant`, …) and kind (`message`, `attachment`, `instructions`, `memory`, `document`). Text or Markdown with a memory filename, such as `memories.txt` or `saved-memories.md`, receives memory-context handling.
+3. Native ChatGPT trees, Claude `chat_messages` lists, Open WebUI wrapped/legacy history, direct SillyTavern JSONL, normalized role/content JSON, memories and text are normalized to `Conversation → Segment[]`. Platforms are labeled `chatgpt`, `claude`, `openwebui`, `sillytavern` or `text`. Only supported ChatGPT/Claude identifiers produce account-side links; other hosts and URLs are not guessed. Every segment carries its role (`user`, `assistant`, …) and kind (`message`, `attachment`, `instructions`, `memory`, `document`). Text or Markdown with a memory filename, such as `memories.txt` or `saved-memories.md`, receives memory-context handling.
 4. `buildReport` runs `detect` over the selected segments and aggregates findings into categories, people, ranked conversations and a monthly timeline. Context snippets (±72 characters) are computed in the worker.
 5. The worker posts only the report back. The archive stays in the worker so the redacted transcript can be produced on demand.
 
@@ -67,6 +67,10 @@ Every request carries a `job` number. The page ignores responses that do not bel
 ```
 
 The standard report masks matched values and supplied watch words. It retains titles, source filenames, identifiers, links, dates and aggregate data, so it is not an anonymized document. The raw report preserves exact watch words and adds unmasked `value`s and a `context` field to each finding. See [download limits](privacy.md#downloads-and-redaction).
+
+## Format contracts
+
+See [input formats](input-formats.md) for the supported roots, native adapters and synthetic examples. Open WebUI prefers readable history nodes over the flat-message fallback. SillyTavern reads explicit role flags and `mes` text from direct JSONL/NDJSON files. Normalized JSON accepts only the documented role/content forms; unsupported objects are not coerced to strings. These adapters do not imply native compatibility with every model provider's export.
 
 ## Testing
 

@@ -1,0 +1,21 @@
+{
+  "id": "synthetic-normalized-conversation",
+  "title": "Synthetic portable transcript",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Synthetic system-only email: normalized-system@example.test."
+    },
+    {
+      "role": "user",
+      "content": [
+        { "type": "text", "text": "Synthetic example: my email is normalized-user@example.test." },
+        { "type": "text", "text": "My daughter named Mila likes model trains." }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": "Synthetic assistant-only email: normalized-assistant@example.test."
+    }
+  ]
+}

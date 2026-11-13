@@ -47,7 +47,7 @@ export const CATEGORIES: Record<Category, CategoryMeta> = {
   },
   people: {
     label: 'Other people',
-    description: 'Family, friends and colleagues you talked about — people who never chose to share.',
+    description: 'Family, friends and colleagues whose details appear in your chats.',
     weight: 4,
   },
   contact: { label: 'Contact details', description: 'Email addresses and phone numbers.', weight: 4 },

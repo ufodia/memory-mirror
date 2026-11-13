@@ -6,7 +6,7 @@
     <title>Memory Mirror — See what your AI chats reveal about you</title>
     <meta
       name="description"
-      content="Review sensitive details in your ChatGPT export locally. Inspect masked findings, add watch words and build a cleanup plan without uploading your conversations."
+      content="Review LLM chat exports locally: ChatGPT, Claude, Open WebUI, SillyTavern and standard message files. Inspect masked findings and build a cleanup plan without uploading your conversations."
     />
     <meta name="theme-color" content="#151227" />
     <meta name="color-scheme" content="dark" />
@@ -15,7 +15,7 @@
     <meta property="og:title" content="Memory Mirror — See what your AI chats reveal about you" />
     <meta
       property="og:description"
-      content="A local privacy workbench for your ChatGPT export. Review health, money, location, identity and secret-related findings, then decide what to clean up."
+      content="A local privacy workbench for LLM chat exports. Review supported ChatGPT, Claude, Open WebUI, SillyTavern and standard message files without uploading your conversations."
     />
     <meta property="og:image" content="/og-image.png" />
     <meta name="twitter:card" content="summary_large_image" />
@@ -57,7 +57,7 @@
         <p class="eyebrow">Private by construction · Open source</p>
         <h1>What have you told your&nbsp;AI?</h1>
         <p class="lead">
-          Memory Mirror reads your ChatGPT data export <strong>inside this tab</strong> and highlights the
+          Memory Mirror reads supported LLM chat exports <strong>inside this tab</strong> and highlights the
           health, money, location, family, identity and secret details you have shared — so you can decide
           what to delete.
         </p>
@@ -89,15 +89,15 @@
           </svg>
           <p class="drop-title">Drop your export here</p>
           <p id="drop-help" class="drop-help">
-            ChatGPT <code>.zip</code>, <code>conversations.json</code>, <code>memories.json</code>, or a
-            <code>.txt</code> of saved memories
+            ChatGPT or Claude <code>.zip</code>, Open WebUI <code>.json</code>, SillyTavern
+            <code>.jsonl</code>, standard message JSON, or <code>.txt</code> notes
           </p>
           <div class="drop-actions">
             <input
               id="file-input"
               type="file"
               multiple
-              accept=".zip,.json,.txt,.md,application/zip,application/json,text/plain"
+              accept=".zip,.json,.jsonl,.ndjson,.txt,.md,application/zip,application/json,application/x-ndjson,text/plain"
             />
             <label class="button primary" for="file-input">Choose files</label>
             <button id="demo-button" class="button ghost" type="button">Try the synthetic demo</button>
@@ -127,7 +127,7 @@
         </ul>
 
         <section id="how" class="how" aria-labelledby="how-title">
-          <h2 id="how-title">Open your ChatGPT export</h2>
+          <h2 id="how-title">Bring your conversations into view</h2>
           <div class="how-grid">
             <article class="how-card">
               <h3>ChatGPT</h3>
@@ -136,7 +136,7 @@
                 <li>
                   Follow
                   <a
-                    href="https://help.openai.com/en/articles/7260999-how-do-i-export-my-chatgpt-history-and-data"
+                    href="https://help.openai.com/en/articles/7260999-exporting-your-chatgpt-history-and-data"
                     rel="noopener"
                     target="_blank"
                     >OpenAI's export guide</a
@@ -147,26 +147,43 @@
               </ol>
             </article>
             <article class="how-card">
-              <h3>Conversation JSON</h3>
+              <h3>Claude</h3>
               <ol>
-                <li>Prefer opening just the conversation file?</li>
-                <li>Extract <code>conversations.json</code> from your ChatGPT archive.</li>
-                <li>Choose that file instead of the complete archive.</li>
+                <li>Request your export using Claude's privacy settings.</li>
+                <li>
+                  Follow
+                  <a
+                    href="https://support.claude.com/en/articles/9450526-export-your-claude-data"
+                    rel="noopener"
+                    target="_blank"
+                    >Claude's export guide</a
+                  >
+                  for your account.
+                </li>
+                <li>Open the downloaded archive or its <code>conversations.json</code> file.</li>
               </ol>
             </article>
             <article class="how-card">
-              <h3>Saved memories</h3>
+              <h3>Other chat tools</h3>
               <ol>
-                <li>Open ChatGPT's memory settings.</li>
-                <li>Copy the list into a <code>.txt</code> file.</li>
-                <li>Drop it here together with the export.</li>
+                <li>Open an Open WebUI JSON export or a SillyTavern JSONL chat.</li>
+                <li>
+                  For other tools, use the
+                  <a
+                    href="https://github.com/ufodia/memory-mirror/blob/main/docs/input-formats.md"
+                    rel="noopener"
+                    target="_blank"
+                    >standard message format</a
+                  >.
+                </li>
+                <li>Copied memories or notes also work as <code>.txt</code> or <code>.md</code>.</li>
               </ol>
             </article>
           </div>
           <p class="fine">
             Exports can take minutes to days to arrive. Memory Mirror only opens
             <code>conversations*.json</code> and <code>memories*.json</code> inside an archive; images and
-            other files are never decompressed.
+            other files are never decompressed. Open other supported JSON and JSONL files directly.
           </p>
         </section>
       </section>
@@ -189,8 +206,8 @@
         <a href="https://buymeacoffee.com/ufodia" rel="noopener" target="_blank">Buy me a coffee</a>
       </p>
       <p class="fine">
-        Memory Mirror is an independent project and is not affiliated with OpenAI. Findings are pattern
-        matches for your review and can be incomplete.
+        Memory Mirror is an independent project and is not affiliated with the chat providers or tools it can
+        import from. Findings are pattern matches for your review and can be incomplete.
       </p>
     </footer>
     <script type="module" src="/src/main.ts"></script>

@@ -12,7 +12,7 @@ The project is maintained by [ufodia](https://github.com/ufodia), with no guaran
 
 ## Processing boundary
 
-Memory Mirror analyzes selected files in your browser, with no application upload endpoint or inference service. The production configuration uses `connect-src 'none'` to block scripted connection APIs; this does not block initial asset requests or external links you open. Imported content is rendered as text. The app does not persist the archive in browser storage, but does not guarantee secure memory erasure. Exported reports can contain identifying metadata and undetected details, so handle them as carefully as the original files. See the [privacy model](docs/privacy.md) for the full boundary.
+Memory Mirror analyzes supported native chat exports, normalized role/content JSON, supplied memories and text in your browser, with no application upload endpoint or inference service. The supported formats are documented in [input formats](docs/input-formats.md). The production configuration uses `connect-src 'none'` to block scripted connection APIs; this does not block initial asset requests or external links you open. Imported content is rendered as text. The app does not persist the archive in browser storage, but does not guarantee secure memory erasure. Exported reports can contain identifying metadata and undetected details, so handle them as carefully as the original files. See the [privacy model](docs/privacy.md) for the full boundary.
 
 ## Scope
 

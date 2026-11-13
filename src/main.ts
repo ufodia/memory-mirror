@@ -21,6 +21,16 @@ const TABS: { id: Tab; label: string }[] = [
   { id: 'export', label: 'Export' },
 ];
 
+const SOURCE_LABELS: Record<string, string> = {
+  chatgpt: 'ChatGPT',
+  claude: 'Claude',
+  openwebui: 'Open WebUI',
+  sillytavern: 'SillyTavern',
+  text: 'Text transcript',
+};
+
+const sourceName = (platform: string) => SOURCE_LABELS[platform] ?? 'Transcript';
+
 const ICONS: Record<Category, string> = {
   credentials: 'M8 11V8a4 4 0 1 1 8 0v3M6 11h12v9H6z',
   'government-id': 'M4 6h16v12H4zM8 10h3M8 14h6M15 10h2',
@@ -667,6 +677,7 @@ function findingCard(f: FindingView, r: Report) {
             `${f.conversationTitle} ↗`,
           )
         : h('span', {}, f.conversationTitle),
+      conversation ? h('span', {}, `Source: ${sourceName(conversation.platform)}`) : null,
       h('span', {}, formatDate(f.time)),
       h(
         'span',
@@ -775,6 +786,7 @@ function renderCleanup(r: Report): Node {
         h(
           'div',
           { class: 'cleanup-tags' },
+          h('span', { class: 'pill' }, `Source: ${sourceName(c.platform)}`),
           ...c.categories.map((cat) => h('span', { class: `tag cat-${cat}` }, CATEGORIES[cat].label)),
         ),
       ),

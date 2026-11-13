@@ -15,7 +15,7 @@ Memory Mirror exists to reduce how widely your conversations are shared, so it m
 
 To inspect the boundary, load the synthetic demo and check the deployed document and worker response headers in your browser's developer tools. The initial page, scripts, styles and worker are normal same-origin requests. Scanning selected export contents should not produce an analysis upload. The hosting configuration must be checked on the actual deployed origin; a source file alone does not prove a live header is present.
 
-Conversation links open ChatGPT in a separate tab when **you** choose them. Their URLs contain the conversation identifier. Clicking GitHub or Buy Me a Coffee opens an external service subject to its own policies. These visits are outside the local analysis boundary.
+Conversation links open the source app, ChatGPT or Claude, in a separate tab when **you** choose them. Their URLs contain the conversation identifier. Clicking GitHub or Buy Me a Coffee opens an external service subject to its own policies. These visits are outside the local analysis boundary.
 
 ## Downloads and redaction
 

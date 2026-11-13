@@ -8,7 +8,7 @@ First public release.
 
 ### Added
 
-- In-browser review of ChatGPT export archives, `conversations.json`, supplied memory JSON, and text or Markdown, with selective ZIP decompression and explicit input ceilings.
+- In-browser review of ChatGPT and Claude export archives, native Open WebUI JSON, direct SillyTavern JSONL/NDJSON, normalized role/content JSON, supplied memory JSON, and text or Markdown, with selective ZIP decompression and explicit input ceilings.
 - Ordered detectors across 11 categories, including checksum-based card, IBAN and Turkish ID validation, US SSN shape checks, API keys and tokens, and first-person health, money, legal and sensitive-context rules.
 - Third-person rules for saved memories and custom instructions.
 - Exposure score with logarithmic category weighting.

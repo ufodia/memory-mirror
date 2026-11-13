@@ -2,13 +2,14 @@
   <img src="docs/assets/hero.svg" alt="Memory Mirror — See what your AI chats reveal about you" width="100%">
 </p>
 
-<h3 align="center">Review the sensitive details in your ChatGPT history. Keep the analysis on your device.</h3>
+<h3 align="center">Review the sensitive details in your AI chat exports. Keep the analysis on your device.</h3>
 
 <p align="center">An open-source browser workbench for inspecting your export, understanding its findings, and planning a careful cleanup.</p>
 
 <p align="center">
   <a href="https://memory-mirror-app.vercel.app/"><b>Open the live workbench</b></a> ·
   <a href="#quick-start"><b>Quick start</b></a> ·
+  <a href="#supported-formats">Supported formats</a> ·
   <a href="#what-it-finds">What it finds</a> ·
   <a href="#how-it-works">How it works</a> ·
   <a href="#privacy-by-construction">Privacy</a> ·
@@ -33,18 +34,18 @@ Years of conversations with an AI assistant add up. A medication mentioned at 2 
 
 A detail that was useful in one conversation can be easy to forget later. Across a long history, those details can reveal more than you intended to keep in an account.
 
-A ChatGPT data export gives you files to inspect, but a large JSON archive is difficult to review manually. Memory Mirror helps you examine the supported text in that export without sending it to another analysis service. It does not reveal hidden model memory, reconstruct deleted content, or inventory everything a provider retains.
+ChatGPT, Claude and other chat tools can leave you with a large history that is difficult to review manually. Memory Mirror helps you examine supported exports or normalized text without sending them to another analysis service. It does not reveal hidden model memory, reconstruct deleted content, or inventory everything a provider retains.
 
 ## The answer
 
-**Memory Mirror** opens your ChatGPT export **inside your browser tab**, flags potentially sensitive details, shows their source context, and ranks conversations for your review. You decide what to keep or delete in ChatGPT itself.
+**Memory Mirror** opens supported chat exports **inside your browser tab**, flags potentially sensitive details, shows their source context, and ranks conversations for your review. It includes readers for ChatGPT, Claude, Open WebUI and SillyTavern, plus a documented JSON contract and plain text. You decide what to keep or delete in the original app.
 
 - **Local analysis.** The application has no export-upload endpoint or inference API. Production security headers block scripted connections through `fetch`, XHR, WebSocket and related APIs.
 - **Session-only application state.** The app does not persist your archive in browser storage. Reloading or closing the tab ends the review; downloaded files remain on your device.
 - **Inspectable findings.** Deterministic patterns, checksums and word lists produce findings you can review in context. A finding is a prompt for judgment, not proof of a disclosure or a security incident.
 
 <p align="center">
-  <img src="docs/assets/screenshot-overview.png" alt="The Memory Mirror overview: an exposure score of 94, counts of messages, words, unique sensitive items and people, a watch-word bar and category cards for health, money, secrets and more" width="100%">
+  <img src="docs/assets/screenshot-overview.png" alt="The Memory Mirror overview: an exposure score, counts of messages, words, unique sensitive items and people, a watch-word bar and category cards for health, money, secrets and more" width="100%">
   <br><sub>The overview for the built-in synthetic demo: an exposure score, what you shared, and where it concentrates.</sub>
 </p>
 
@@ -79,10 +80,28 @@ Open the printed `http://127.0.0.1:5173` address, then either **drop your export
 
 | Assistant | Where to request it | What to drop into Memory Mirror |
 | --- | --- | --- |
-| **ChatGPT** | Request an official data export through your account's data controls | the export `.zip`, or its supported conversation JSON |
+| **ChatGPT** | Eligible accounts: **Settings → Data controls → Export data**, or follow [OpenAI's export guide](https://help.openai.com/en/articles/7260999-exporting-your-chatgpt-history-and-data) | the export `.zip`, or its supported conversation JSON |
+| **Claude** | Web or desktop: **Settings → Privacy → Export data**; follow [the official export guide](https://support.claude.com/en/articles/9450526-export-your-claude-data) for account eligibility | the export `.zip`, or its supported conversation JSON |
 | **Saved memories** | Copy the entries you want to review from your memory settings | a `.txt` or `.md` file |
 
-You can open several supported files together, such as a conversation archive and a copied memories file. The app combines them into one report; overlapping files are not automatically deduplicated. Availability and content of provider exports can vary. See the [input reference](docs/user-guide.md#supported-inputs).
+You can open several supported files together, such as a ChatGPT archive, a Claude archive and a copied memories file. The app combines them into one report; overlapping files are not automatically deduplicated. Export access and contents vary by account and workspace policy.
+
+## Supported formats
+
+Compatibility follows the file structure, not the model name. A conversation generated by a local model or another provider can be reviewed when its frontend exports a supported format, or when you convert it locally to the documented JSON contract.
+
+| Source | Input | Review boundary |
+| --- | --- | --- |
+| **ChatGPT** | Official export ZIP or supported conversation JSON | Readable message-tree branches, supported instructions and attachment names; links to the original conversation when its ID is supported |
+| **Claude** | Official export ZIP or supported `chat_messages` JSON | Supplied message text and supported attachment text fields; links to the original conversation when its ID is supported |
+| **Open WebUI** | Native `.json`, wrapped or legacy `history.messages` structure | Every readable message-tree branch; no guessed link to a self-hosted instance |
+| **SillyTavern** | Native `.jsonl` or `.ndjson` chat file, opened directly | `mes` text and explicit user/assistant roles; no swipe history, reasoning fields or attachments |
+| **Other tools and models** | Normalized role/content `.json` | A message array, an object with `messages`, or a collection of such conversations; only the documented text fields are read |
+| **Copied memories or text** | `.txt`, `.md`, or supported memory JSON | Supplied text only; name a copied memory file `memories.txt` to enable memory-context patterns |
+
+**Gemini, Grok, DeepSeek, Copilot and Mistral native export formats are not claimed as supported.** Their conversations can be reviewed through a supported frontend or a local conversion to the documented contract. A model's API response or vendor archive is not automatically that contract.
+
+See [input formats and synthetic examples](docs/input-formats.md) for exact shapes, role handling, ignored fields, conversion guidance and ZIP limits. This is a review tool, not a migration or re-import utility for those applications.
 
 ## What it finds
 
@@ -104,7 +123,7 @@ You can open several supported files together, such as a conversation archive an
 | 🙂 **Identity** | your name, age, date of birth | explicit phrases such as "my name is" |
 | 👁️ **Watch words** | anything you add: a codename, a street, a child's name | exact whole-word matches |
 
-Supported custom-instruction fields and attachment names in the export are included. Supplied memories are also reviewed, including patterns such as *"Has a daughter named Mila"*. The app only sees text in the files you choose; it cannot retrieve account data on its own.
+Supported ChatGPT custom-instruction fields and attachment names are included. The Claude reader also reads supported attachment text fields when they are present in the input; it cannot open the original attachment or create missing extracted text. Supplied memories are reviewed too, including patterns such as *"Has a daughter named Mila"*. The app only sees text in the files you choose; it cannot retrieve account data on its own.
 
 ### Context, not keywords
 
@@ -125,10 +144,10 @@ Read the full [detection reference](docs/detection.md), including [what it canno
   <img src="docs/assets/how-it-works.svg" alt="Drop your export, scan it in a Web Worker inside your browser tab, then review a masked report and clean up" width="100%">
 </p>
 
-1. **Read.** Select supported conversation or memory JSON entries from the archive, with size limits. Image and audio contents are not analyzed. Text from every message-tree branch present in a supported ChatGPT export, supported custom-instruction fields, and attachment names is normalized for review.
+1. **Read.** Open supported native JSON, direct JSONL/NDJSON, text or selectively read conversation/memory JSON from an archive, with size limits. Image and audio contents are not analyzed. The supported text and roles are normalized for review.
 2. **Detect.** A Web Worker applies ordered patterns and validators to your messages and supported supplied text. Assistant replies are opt-in. Built-in detectors resolve overlapping spans by priority; your watch words remain independent annotations and do not hide a credential finding.
 3. **Score.** Unique items are weighted by sensitivity, with diminishing returns per category.
-4. **Act.** Review findings in context, mark conversations as reviewed, and download a checklist. Open a conversation in ChatGPT when a link is available and decide there whether to keep or delete it. The checklist cannot confirm deletion.
+4. **Act.** Review findings in context, mark conversations as reviewed, and download a checklist. Open a conversation link when available, or locate it manually in its source app, and decide there whether to keep or delete it. The checklist cannot confirm deletion.
 
 <p align="center">
   <img src="docs/assets/score-scale.svg" alt="The exposure score formula and its four levels: Low, Moderate, High and Very high" width="100%">
@@ -254,7 +273,7 @@ Context detectors are English. Language-neutral patterns (emails, cards, IBANs, 
 <details>
 <summary><b>Will deleting a conversation remove it everywhere?</b></summary>
 
-Memory Mirror has no account access and cannot delete a chat, memory or account. Review deletion, saved memory and training controls in ChatGPT separately. The app cannot verify the provider's retention or deletion outcome.
+Memory Mirror has no account access and cannot delete a chat, memory or account. Review the source application's deletion, saved-memory and training controls separately. The app cannot verify a provider's retention or deletion outcome.
 </details>
 
 <details>
@@ -268,6 +287,7 @@ The interface rejects selected inputs above a combined 1.5 billion bytes. That i
 | Guide | What's inside |
 | --- | --- |
 | [User guide](docs/user-guide.md) | every screen, export and option, plus troubleshooting |
+| [Input formats](docs/input-formats.md) | native-format compatibility, normalization contract and synthetic examples |
 | [Detection reference](docs/detection.md) | categories, validators, first-person rules, scoring and blind spots |
 | [Privacy model](docs/privacy.md) | what the app can and cannot do with your data |
 | [Architecture](docs/architecture.md) | modules, worker protocol and report format |
@@ -292,7 +312,7 @@ Contributions are welcome — please read [CONTRIBUTING.md](CONTRIBUTING.md). Ne
 
 ## Support
 
-Memory Mirror is free to use and MIT licensed. If it helps you review your ChatGPT history, you can optionally support ufodia's independent open-source work. A reproducible synthetic fixture, clear bug report or documentation improvement helps too.
+Memory Mirror is free to use and MIT licensed. If it helps you review your AI chat history, you can optionally support ufodia's independent open-source work. A reproducible synthetic fixture, clear bug report or documentation improvement helps too.
 
 <p align="center">
   <a href="https://buymeacoffee.com/ufodia"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee" height="56"></a>
@@ -302,4 +322,4 @@ Memory Mirror is free to use and MIT licensed. If it helps you review your ChatG
 
 [MIT](LICENSE) © 2026 [ufodia](https://github.com/ufodia)
 
-Memory Mirror is an independent project and is not affiliated with OpenAI. ChatGPT is a trademark of its respective owner.
+Memory Mirror is an independent project and is not affiliated with the tools or model providers it supports. ChatGPT, Claude, Open WebUI and SillyTavern names identify their respective products; rights remain with their owners.

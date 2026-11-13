@@ -1,0 +1,4 @@
+{"user_name":"You","character_name":"Synthetic assistant","chat_metadata":{}}
+{"name":"You","is_user":true,"is_system":false,"send_date":"2026-11-12T09:00:00Z","mes":"Synthetic example: reach me at sillytavern-user@example.test."}
+{"name":"Synthetic assistant","is_user":false,"is_system":false,"send_date":"2026-11-12T09:00:01Z","mes":"Synthetic assistant-only email: sillytavern-assistant@example.test."}
+{"name":"System","is_system":true,"mes":"Synthetic system-only email: sillytavern-system@example.test."}

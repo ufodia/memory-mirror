@@ -2,6 +2,8 @@
 
 Memory Mirror's own source code, documentation and artwork are MIT-licensed © 2026 ufodia.
 
+ChatGPT, Claude, Open WebUI and SillyTavern are names of independent products. They identify supported input formats; Memory Mirror is not affiliated with their owners or model providers. Rights to those names remain with their respective owners.
+
 ## Runtime dependency
 
 | Component | Version | License | Use |
