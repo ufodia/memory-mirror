@@ -3,6 +3,22 @@ import { strToU8, zipSync } from 'fflate';
 import { readFile } from 'node:fs/promises';
 import { DEMO_CHATGPT } from '../src/demo.ts';
 
+test('privacy and finding filters retain keyboard focus when dashboard is rebuilt', async ({ page }) => {
+  await loadDemo(page);
+  await page.getByText('Monthly finding counts (text)', { exact: true }).press('Enter');
+  const timeline = page.getByRole('table', { name: 'Monthly finding counts', exact: true });
+  await expect(timeline).toBeVisible();
+  await expect(timeline).toContainText('2026-03');
+  const privacy = page.getByRole('switch', { name: 'Privacy screen' });
+  await privacy.press('Space');
+  await expect(privacy).toBeFocused();
+  await page.getByRole('tab', { name: /Findings/ }).press('Enter');
+  await page.locator('#filter-health').press('Enter');
+  await expect(page.locator('#filter-health')).toBeFocused();
+  await page.locator('#high-confidence').press('Space');
+  await expect(page.locator('#high-confidence')).toBeFocused();
+});
+
 async function loadDemo(page: Page) {
   await page.goto('/');
   await page.getByRole('button', { name: 'Try the synthetic demo' }).click();

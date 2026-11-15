@@ -255,6 +255,7 @@ function icon(category: Category) {
 
 function renderDashboard() {
   if (!report) return;
+  const focusedId = dashboard.contains(document.activeElement) ? document.activeElement?.id : '';
   const r = report;
   const uniqueItems = r.categories.reduce((n, c) => n + c.unique, 0);
   const range = r.stats.first
@@ -354,6 +355,7 @@ function renderDashboard() {
   });
   panel.append(renderTab(r));
   dashboard.replaceChildren(header, kpis, optionsBar, tabs, panel);
+  if (focusedId) document.getElementById(focusedId)?.focus({ preventScroll: true });
 }
 
 function headline(r: Report): string {
@@ -371,6 +373,7 @@ function toggle(label: string, on: boolean, change: (on: boolean) => void) {
     'button',
     {
       class: 'switch',
+      id: 'privacy-screen',
       type: 'button',
       role: 'switch',
       'aria-checked': String(on),
@@ -538,6 +541,28 @@ function renderTimeline(r: Report): Node | string {
       { viewBox: `0 0 ${width} ${height}`, role: 'img', 'aria-label': 'Findings per month' },
       ...bars,
     ),
+    h(
+      'details',
+      { class: 'timeline-data' },
+      h('summary', {}, 'Monthly finding counts (text)'),
+      h(
+        'table',
+        {},
+        h('caption', {}, 'Monthly finding counts'),
+        h(
+          'thead',
+          {},
+          h('tr', {}, h('th', { scope: 'col' }, 'Month'), h('th', { scope: 'col' }, 'Findings')),
+        ),
+        h(
+          'tbody',
+          {},
+          ...r.timeline.map((m) =>
+            h('tr', {}, h('th', { scope: 'row' }, m.month), h('td', {}, String(m.count))),
+          ),
+        ),
+      ),
+    ),
   );
 }
 
@@ -565,6 +590,7 @@ function renderFindings(r: Report): Node {
         'button',
         {
           class: 'chip',
+          id: `filter-${chip.id}`,
           type: 'button',
           'aria-pressed': String(filter.category === chip.id),
           onclick: () => {
@@ -594,6 +620,7 @@ function renderFindings(r: Report): Node {
     { class: 'check' },
     h('input', {
       type: 'checkbox',
+      id: 'high-confidence',
       checked: filter.confidence === 'high',
       onchange: (e: Event) => {
         filter = { ...filter, confidence: (e.target as HTMLInputElement).checked ? 'high' : 'all' };

@@ -1084,3 +1084,27 @@ label.button:focus-within {
     scroll-behavior: auto !important;
   }
 }
+
+.timeline-data {
+  margin-top: 12px;
+}
+.timeline-data summary {
+  cursor: pointer;
+}
+.timeline-data table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+.timeline-data caption {
+  text-align: left;
+  font-weight: 650;
+  margin-bottom: 8px;
+}
+.timeline-data th,
+.timeline-data td {
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid var(--line-strong);
+}
