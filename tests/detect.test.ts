@@ -16,6 +16,20 @@ const types = (findings: Finding[]) => findings.map((f) => f.type);
 const values = (findings: Finding[]) => findings.map((f) => f.value);
 
 describe('identifiers and secrets', () => {
+  it('does not turn invalid SSN-shaped identifiers into phone numbers', () => {
+    expect(scan('Identifier 000-12-3456')).toEqual([]);
+  });
+  it('recognizes Turkish first-person health disclosures without flagging general questions', () => {
+    expect(types(scan('Şeker hastalığı var, insülin kullanıyorum.'))).toEqual(['condition', 'medication']);
+    expect(scan('Şeker hastalığı ve insülin nedir?')).toEqual([]);
+    expect(scan('Ben diyabet nedir diye sordum?')).toEqual([]);
+    expect(scan('Benim insülin hakkında sorum var.')).toEqual([]);
+    expect(types(scan('Bende diyabet var.'))).toEqual(['condition']);
+    expect(types(scan('Benim şeker hastalığım var ve insülin kullanıyorum.'))).toEqual([
+      'condition',
+      'medication',
+    ]);
+  });
   it('finds checksum-valid identifiers with exact spans', () => {
     const text = 'Card 4242 4242 4242 4242, IBAN GB82 WEST 1234 5698 7654 32 and SSN 123-45-6789.';
     const found = scan(text);

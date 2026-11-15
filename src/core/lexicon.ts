@@ -5,6 +5,7 @@
  */
 
 export const HEALTH_CONDITIONS = [
+  'şeker hastalığım', 'şeker hastalığı', 'diyabetim', 'diyabet',
   'diabetes', 'type 1 diabetes', 'type 2 diabetes', 'prediabetes', 'hypertension', 'high blood pressure',
   'asthma', 'cancer', 'tumor', 'tumour', 'leukemia', 'lymphoma', 'chemotherapy', 'chemo', 'radiation therapy',
   'HIV', 'hepatitis', 'epilepsy', 'seizures', 'multiple sclerosis', "Crohn's", 'IBS', 'celiac', 'arthritis',
@@ -30,6 +31,7 @@ export const REPRODUCTIVE = [
 ];
 
 export const MEDICATIONS = [
+  'insülin',
   'sertraline', 'Zoloft', 'fluoxetine', 'Prozac', 'escitalopram', 'Lexapro', 'citalopram', 'bupropion',
   'Wellbutrin', 'venlafaxine', 'Effexor', 'duloxetine', 'Cymbalta', 'mirtazapine', 'quetiapine', 'Seroquel',
   'lithium', 'lamotrigine', 'Lamictal', 'aripiprazole', 'Abilify', 'risperidone', 'Adderall', 'Ritalin',

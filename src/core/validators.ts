@@ -88,6 +88,7 @@ export function isPhone(value: string): boolean {
   if (digits.length < 9 || digits.length > 15) return false;
   if (/^(\d)\1+$/.test(digits)) return false;
   const trimmed = value.trim();
+  if (/^\d{3}-\d{2}-\d{4}$/.test(trimmed)) return false; // SSN-shaped identifiers are not phone numbers.
   if (/^\d{4}[-/.]\d{2}[-/.]\d{2}$/.test(trimmed) || /^\d{2}[-/.]\d{2}[-/.]\d{4}$/.test(trimmed))
     return false;
   if (/^\d{1,3}(?:\.\d{1,3}){3}$/.test(trimmed)) return false; // IPv4 address

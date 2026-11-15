@@ -177,6 +177,12 @@ export function sentenceAround(text: string, start: number, end: number): string
 
 /** `null` when the sentence is not about the writer, otherwise how strongly it is. */
 export function firstPersonStrength(sentence: string): Confidence | null {
+  if (
+    /(?<![\p{L}])(?:kullanıyorum|hastasıyım|tanısı aldım)(?![\p{L}])|(?<![\p{L}])bende\s+(?:diyabet|şeker hastalığı)\s+var(?![\p{L}])|(?<![\p{L}])(?:diyabetim|şeker hastalığım)\s+var(?![\p{L}])/iu.test(
+      sentence,
+    )
+  )
+    return 'high';
   if (FIRST_PERSON_STRONG.test(sentence)) return 'high';
   return FIRST_PERSON.test(sentence) ? 'medium' : null;
 }

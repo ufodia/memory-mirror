@@ -267,7 +267,7 @@ No. It uses deterministic patterns, checksums and word lists, so it can run offl
 <details>
 <summary><b>Which languages are supported?</b></summary>
 
-Context detectors are English. Language-neutral patterns (emails, cards, IBANs, keys, coordinates) work in any language, and Turkish national IDs and street addresses are recognized. Add names or terms in other languages as watch words.
+Context detectors are primarily English, with a limited set of explicit Turkish health-disclosure patterns. Language-neutral patterns (emails, cards, IBANs, keys, coordinates) work in any language, and Turkish national IDs and street addresses are recognized. Add names or terms in other languages as watch words.
 </details>
 
 <details>

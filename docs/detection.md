@@ -46,6 +46,8 @@ Health, special-category, immigration, legal and money terms count only inside a
 
 Supplied memory and custom-instruction segments skip this first-person check. Separate third-person patterns include *Has a daughter named …*, *Works at …* and *Lives in …*. A filename or structured memory field identifies the intended input type; the app cannot independently verify whose details it contains.
 
+Turkish support is limited to selected terms and explicit first-person experience cues such as `insülin kullanıyorum`, `bende diyabet var` and `şeker hastalığım var`. A bare `ben` or `benim` does not establish a health disclosure. This is a sentence-level heuristic rather than a full Turkish parser: mixed subjects or uncommon inflections can still be misclassified or missed.
+
 ### Overlaps
 
 When two built-in detectors match overlapping text in the same message, the earlier rule wins: secrets, identifiers, contact details, location, identity, work, health, special categories, money and people. A bare relation ("my daughter") directly followed by a name is merged into the named-person finding.
